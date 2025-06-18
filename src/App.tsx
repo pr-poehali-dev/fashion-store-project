@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CartProvider } from "@/contexts/CartContext";
-import Home from "@/pages/Home";
+import Index from "@/pages/Index";
 import Catalog from "@/pages/Catalog";
 import Brands from "@/pages/Brands";
 import NewArrivals from "@/pages/NewArrivals";
@@ -19,7 +19,7 @@ function App() {
       <Router>
         <div className="min-h-screen bg-background">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Index />} />
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/brands" element={<Brands />} />
             <Route path="/new-arrivals" element={<NewArrivals />} />
