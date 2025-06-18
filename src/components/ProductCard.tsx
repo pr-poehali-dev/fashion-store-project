@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Icon from "@/components/ui/icon";
+import { useCart } from "@/contexts/CartContext";
 
 interface ProductCardProps {
   id: string;
@@ -14,6 +15,7 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({
+  id,
   name,
   price,
   originalPrice,
@@ -22,6 +24,7 @@ const ProductCard = ({
   isNew = false,
   discount,
 }: ProductCardProps) => {
+  const { addToCart } = useCart();
   return (
     <div className="group bg-white rounded-lg shadow-sm border hover:shadow-lg transition-all duration-300 overflow-hidden animate-fade-in">
       <div className="relative aspect-[3/4] overflow-hidden">
@@ -74,6 +77,22 @@ const ProductCard = ({
           <Button
             size="sm"
             className="bg-primary hover:bg-primary/90 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+            onClick={() =>
+              addToCart({
+                id,
+                name,
+                price,
+                originalPrice,
+                image,
+                brand,
+                isNew,
+                discount,
+                category: "",
+                size: [],
+                color: [],
+                description: "",
+              })
+            }
           >
             <Icon name="Plus" size={16} />
           </Button>
