@@ -1,7 +1,10 @@
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
+import DeliveryTracker from "@/components/DeliveryTracker";
+import PaymentMethods from "@/components/PaymentMethods";
 
 const Delivery = () => {
   return (
@@ -106,6 +109,64 @@ const Delivery = () => {
               </ul>
             </div>
           </div>
+        </div>
+
+        <div className="mb-8">
+          <h2 className="font-montserrat font-bold text-2xl text-dark-purple mb-6">
+            Отслеживание заказа
+          </h2>
+          <div className="bg-white rounded-lg shadow-sm border">
+            <DeliveryTracker />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <PaymentMethods
+            totalAmount={4500}
+            onPaymentSelect={(method) =>
+              console.log("Selected payment:", method)
+            }
+          />
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-3">
+                <Icon name="MapPin" size={24} className="text-primary" />
+                Калькулятор стоимости
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Город доставки
+                  </label>
+                  <select className="w-full p-2 border rounded-lg">
+                    <option>Москва</option>
+                    <option>Санкт-Петербург</option>
+                    <option>Казань</option>
+                    <option>Новосибирск</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Вес заказа (кг)
+                  </label>
+                  <input
+                    type="number"
+                    className="w-full p-2 border rounded-lg"
+                    placeholder="1.5"
+                    min="0.1"
+                    step="0.1"
+                  />
+                </div>
+                <Button className="w-full">
+                  <Icon name="Calculator" size={16} className="mr-2" />
+                  Рассчитать стоимость
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         <Card>
