@@ -72,32 +72,54 @@ const PaymentMethods = ({
   };
 
   const handleProceedToPayment = () => {
-    // Здесь будет интеграция с выбранным платежным провайдером
+    // Интеграция с российскими платежными системами
     console.log(
       `Proceeding with payment method: ${selectedMethod}, amount: ${totalAmount}`,
     );
 
-    // Пример интеграции с разными провайдерами
     switch (selectedMethod) {
       case "yukassa":
-        // Интеграция с ЮKassa
-        window.location.href = `/api/payment/yukassa?amount=${totalAmount}`;
+        // ЮKassa интеграция
+        window.open(
+          `/api/payment/yukassa?amount=${totalAmount}&return_url=${window.location.origin}/success`,
+          "_blank",
+        );
         break;
       case "sberbank":
-        // Интеграция со Сбербанком
-        window.location.href = `/api/payment/sberbank?amount=${totalAmount}`;
+        // Сбербанк Онлайн
+        window.open(
+          `/api/payment/sberbank?amount=${totalAmount}&return_url=${window.location.origin}/success`,
+          "_blank",
+        );
         break;
       case "tinkoff":
-        // Интеграция с Тинькофф
-        window.location.href = `/api/payment/tinkoff?amount=${totalAmount}`;
+        // Тинькофф Эквайринг
+        window.open(
+          `/api/payment/tinkoff?amount=${totalAmount}&return_url=${window.location.origin}/success`,
+          "_blank",
+        );
         break;
       case "cloud-payments":
-        // Интеграция с CloudPayments
-        window.location.href = `/api/payment/cloudpayments?amount=${totalAmount}`;
+        // CloudPayments
+        window.open(
+          `/api/payment/cloudpayments?amount=${totalAmount}&return_url=${window.location.origin}/success`,
+          "_blank",
+        );
+        break;
+      case "card":
+        // Универсальная карточная оплата
+        window.open(
+          `/api/payment/card?amount=${totalAmount}&return_url=${window.location.origin}/success`,
+          "_blank",
+        );
+        break;
+      case "cash":
+        // Наличная оплата - переход к оформлению заказа
+        alert("Заказ оформлен! Оплата при получении.");
         break;
       default:
         alert(
-          "Выбранный способ оплаты будет доступен после интеграции с backend",
+          "⚠️ Выбранный способ оплаты будет доступен после интеграции с backend. Следите за обновлениями в нашем Telegram: https://t.me/+QgiLIa1gFRY4Y2Iy",
         );
     }
   };

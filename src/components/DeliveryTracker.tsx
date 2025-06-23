@@ -50,11 +50,28 @@ const DeliveryTracker = () => {
     if (!trackingNumber.trim()) return;
 
     setIsLoading(true);
-    // Имитация API запроса
-    setTimeout(() => {
-      setTrackingData(mockTrackingData);
+
+    try {
+      // В будущем здесь будет реальная интеграция с СДЭК API
+      // const response = await fetch(`/api/cdek/track/${trackingNumber}`);
+      // const data = await response.json();
+
+      // Пока используем моковые данные с улучшенной логикой
+      setTimeout(() => {
+        const hasValidFormat = /^[0-9]{10,15}$/.test(trackingNumber);
+
+        if (hasValidFormat) {
+          setTrackingData(mockTrackingData);
+        } else {
+          setTrackingData([]);
+        }
+        setIsLoading(false);
+      }, 800); // Реалистичная задержка
+    } catch (error) {
+      console.error("Ошибка отслеживания:", error);
+      setTrackingData([]);
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   const getStatusColor = (status: string) => {
